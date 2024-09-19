@@ -1,0 +1,37 @@
+:root {
+    --bg1: #2e3440;
+    --bg2: #3b4252;
+    --bg3: #434c5e;
+    --bg4: #4c566a;
+}
+
+body {
+    background-color: var(--bg1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    margin: 0;
+}
+
+#main-container {
+    display: grid;
+    grid-template: 1fr / 1fr 4fr;
+    margin: 30px;
+    height: 95%;
+    width: 100%;
+}
+
+#sidebar,
+#tasks-container {
+
+}
+
+#sidebar {
+    background-color: var(--bg2);
+}
+
+#tasks-container {
+    background-color: var(--bg3);
+}
