@@ -5,7 +5,14 @@
     --bg4: #4c566a;
 }
 
+@font-face {
+    font-family: rubik;
+    src: url('./assets/Rubik-Regular.ttf');
+}
+
 body {
+    font-family: rubik, roboto;
+    color: white;
     background-color: var(--bg1);
     display: flex;
     justify-content: center;
@@ -15,9 +22,13 @@ body {
     margin: 0;
 }
 
+h1{
+    margin: 16px;
+}
+
 #main-container {
     display: grid;
-    grid-template: 1fr / 1fr 4fr;
+    grid-template: 1fr / minmax(250px, 1fr) 5fr;
     margin: 30px;
     height: 95%;
     width: 100%;
@@ -34,4 +45,18 @@ body {
 
 #tasks-container {
     background-color: var(--bg3);
+}
+
+#sidebar button {
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-family: inherit;
+    font-size: 24px;
+    padding: 20px 5px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+#sidebar button:hover {
+    
 }
