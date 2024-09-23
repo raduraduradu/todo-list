@@ -1,6 +1,6 @@
 const domController = (function () {
     const sidebar = document.querySelector("#sidebar");
-    const tasksContainer = document.querySelector("#tasks-container div");
+    const tasksContainer = document.querySelector("#tasks-container #content");
 
     let projectContents = {};
 
@@ -15,6 +15,11 @@ const domController = (function () {
         }
         sidebar.appendChild(btn);
     }
+
+    const addTaskToUI = () => {
+        //undone
+    }
+
     return {addProjectToUI, projectContents}
 })();
 

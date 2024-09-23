@@ -23,7 +23,7 @@ body {
 }
 
 h1{
-    margin: 16px;
+    margin: 0;
 }
 
 #main-container {
@@ -46,17 +46,52 @@ h1{
 #tasks-container {
     background-color: var(--bg3);
 }
+.header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 20px;
+}
+.header-div button {
+    font-size: 40px;
+    margin: 0;
+    padding: 0 5px;
+}
 
-#sidebar button {
-    background-color: rgba(0,0,0,0);
+button {
+    background-color: inherit;
     color: white;
     font-family: inherit;
     font-size: 24px;
     padding: 20px 5px;
-    width: 100%;
     border: none;
     cursor: pointer;
 }
-#sidebar button:hover {
-    
+
+#sidebar > button {
+    width: 100%;
+}
+
+button:hover {
+    filter: brightness(0.9);
+}
+
+dialog {
+    background-color: inherit;
+    color: inherit;
+    padding: 10px;
+    border: none;
+}
+dialog * {
+    margin: 16px;
+}
+dialog button {
+    font-size: 18px;
+    background-color: var(--bg3);
+    padding: 5px 8px;
+}
+
+dialog#task-modal div {
+    display: flex;
+    align-items: center;
 }
