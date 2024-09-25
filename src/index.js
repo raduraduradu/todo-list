@@ -28,6 +28,9 @@ const projectModal = document.querySelector("#project-modal");
 document.querySelector("#add-project").onclick = () => {
     projectModal.showModal();
 }
+document.querySelector("#project-form-cancel").onclick = () => {
+    projectModal.close();
+}
 
 const projectForm = document.querySelector("#project-modal form");
 projectForm.onsubmit = (e) => {
@@ -55,6 +58,9 @@ projectForm.onsubmit = (e) => {
 const taskModal = document.querySelector("#task-modal");
 document.querySelector("#add-task").onclick = () => {
     taskModal.showModal();
+}
+document.querySelector("#task-form-cancel").onclick = () => {
+    taskModal.close();
 }
 
 const taskForm = document.querySelector("#task-modal form");
