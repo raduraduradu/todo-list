@@ -58,6 +58,18 @@ h1{
     padding: 0 5px;
 }
 
+#welcome-page {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome-page h1 {
+    font-size: 40px;
+}
+
 button {
     background-color: inherit;
     color: white;
@@ -83,7 +95,7 @@ dialog {
     border: none;
 }
 dialog * {
-    margin: 16px;
+    margin: 16px 8px;
 }
 dialog button {
     font-size: 18px;

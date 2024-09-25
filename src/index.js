@@ -1,7 +1,7 @@
 import "./style.css";
 import {domController} from "./domController.js";
 
-const todo = function (title, description, dueDate, important) {
+const todo = function (name, description, dueDate, important) {
     const done = false;
     const toggleDone = () => {
         done = !done;
@@ -11,7 +11,12 @@ const todo = function (title, description, dueDate, important) {
         important = !important;
     }
 
-    return {title, description, dueDate, important, toggleDone, togglePriority}
+    return {name, description, dueDate, important, toggleDone, togglePriority}
+}
+
+const project = (name) => {
+    let tasks = [];
+    return {name, tasks}
 }
 
 let projects = [];
@@ -33,15 +38,18 @@ projectForm.onsubmit = (e) => {
         e.preventDefault();
         alert("invalid input");
     }
+    if(getProject(projectName) !== undefined) {
+        e.preventDefault();
+        alert("Project name already taken");
+    }
 
     else {
-        projects.push({
-            name: projectName,
-            tasks: []
-        })
+        projects.push(project(projectName));
         domController.addProjectToUI(getProject(projectName));
     }
 }
+
+
 
 
 const taskModal = document.querySelector("#task-modal");
@@ -52,6 +60,14 @@ document.querySelector("#add-task").onclick = () => {
 const taskForm = document.querySelector("#task-modal form");
 taskForm.onsubmit = (e) => {
     //undone
+    let submittedTask = todo(taskForm["task-name"].value,
+        taskForm["description"].value,
+        taskForm["date"].value,
+        taskForm["important"].value);
+
+    getProject(taskForm["select-project"].value).tasks.push(submittedTask);
+
+    domController.addTaskToUI(submittedTask, taskForm["select-project"].value);
 }
 
 
@@ -59,10 +75,10 @@ taskForm.onsubmit = (e) => {
 
 //example projects and todos, manually inserted
 
-projects.push({ name: "general", tasks: [] })
+projects.push(project("general"));
 domController.addProjectToUI(getProject("general"));
 
-projects.push({ name: "project1", tasks: [] })
+projects.push(project("project1"));
 domController.addProjectToUI(getProject("project1"));
 
 getProject("general").tasks.push(todo("read", "30 pages", new Date(), true));
