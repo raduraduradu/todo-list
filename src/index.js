@@ -1,7 +1,11 @@
 import "./style.css";
 import {domController} from "./domController.js";
+import { format } from "date-fns";
 
 const todo = function (name, description, dueDate, important) {
+    
+    dueDate = format(dueDate, 'MM/dd/yyyy');
+
     const done = false;
     const toggleDone = () => {
         done = !done;
@@ -59,9 +63,9 @@ const taskModal = document.querySelector("#task-modal");
 document.querySelector("#add-task").onclick = () => {
     taskModal.showModal();
 }
-document.querySelector("#task-form-cancel").onclick = () => {
+document.querySelector("#task-form-cancel").addEventListener("click", () => {
     taskModal.close();
-}
+});
 
 const taskForm = document.querySelector("#task-modal form");
 taskForm.onsubmit = (e) => {
@@ -87,4 +91,6 @@ domController.addProjectToUI(getProject("general"));
 projects.push(project("project1"));
 domController.addProjectToUI(getProject("project1"));
 
-getProject("general").tasks.push(todo("read", "30 pages", new Date(), true));
+let task1 = todo("read", "30 pages", new Date(), true);
+getProject("general").tasks.push(task1);
+domController.addTaskToUI(task1, getProject("general").name);

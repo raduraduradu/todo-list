@@ -46,6 +46,14 @@ h1{
 #tasks-container {
     background-color: var(--bg3);
 }
+
+.task {
+    background-color: var(--bg4);
+    padding: 10px;
+    margin: 10px;
+    display: grid;
+}
+
 .header-div {
     display: flex;
     justify-content: space-between;

@@ -23,13 +23,23 @@ const domController = (function () {
 
     const addTaskToUI = (task, projectName) => {
         //undone
-        let div = document.createElement("div");
-        let h3 = document.createElement("h3");
-        h3.textContent = task.name;
-        div.appendChild(h3);
+        let container = document.createElement("div");
+        container.classList.add("task");
+
+        let h2 = document.createElement("h2");
+        h2.textContent = task.name;
+        container.appendChild(h2);
+
+        let p = document.createElement("p");
+        p.textContent = task.description;
+        container.appendChild(p);
+
+        let p2 = document.createElement("p");
+        p2.textContent = `Due ${task.dueDate}`;
+        container.appendChild(p2);
 
         console.log(projectContents);
-        projectContents[projectName].appendChild(div);
+        projectContents[projectName].appendChild(container);
     }
 
     return {addProjectToUI, addTaskToUI, projectContents}
