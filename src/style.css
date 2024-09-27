@@ -50,8 +50,21 @@ h1{
 .task {
     background-color: var(--bg4);
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     display: grid;
+}
+.task h2 {
+    display: inline;
+    margin-left: 5px;
+}
+h2.done {
+    text-decoration: line-through;
+}
+
+.star-icon {
+    filter: brightness(0) saturate(100%) invert(86%) sepia(18%) saturate(869%) hue-rotate(348deg) brightness(99%) contrast(86%);
+    width: 30px;
+    cursor: pointer;
 }
 
 .header-div {

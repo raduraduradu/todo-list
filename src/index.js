@@ -1,21 +1,25 @@
 import "./style.css";
 import {domController} from "./domController.js";
-import { format } from "date-fns";
+import { format, formatDistance } from "date-fns";
 
-const todo = function (name, description, dueDate, important) {
+const todo = function (name, description, dueDate, importance) {
     
-    dueDate = format(dueDate, 'MM/dd/yyyy');
+    dueDate = `${formatDistance(dueDate, Date.now(), {addSuffix: true})} (${format(dueDate, 'MM/dd/yyyy')})`;
 
-    const done = false;
+    /*let done = false;
     const toggleDone = () => {
         done = !done;
+    }*/
+    
+    const getImportance = () => {
+        return importance;
     }
 
-    const togglePriority = () => {
-        important = !important;
+    const toggleImportance = () => {
+        importance = !importance;
     }
 
-    return {name, description, dueDate, important, toggleDone, togglePriority}
+    return {name, description, dueDate, getImportance, toggleImportance}
 }
 
 const project = (name) => {
@@ -58,7 +62,6 @@ projectForm.onsubmit = (e) => {
 
 
 
-
 const taskModal = document.querySelector("#task-modal");
 document.querySelector("#add-task").onclick = () => {
     taskModal.showModal();
@@ -69,11 +72,11 @@ document.querySelector("#task-form-cancel").addEventListener("click", () => {
 
 const taskForm = document.querySelector("#task-modal form");
 taskForm.onsubmit = (e) => {
-    //undone
+    let important = document.querySelector("#task-modal #important").checked
     let submittedTask = todo(taskForm["task-name"].value,
         taskForm["description"].value,
         taskForm["date"].value,
-        taskForm["important"].value);
+        important);
 
     getProject(taskForm["select-project"].value).tasks.push(submittedTask);
 
