@@ -6,10 +6,10 @@ const todo = function (name, description, dueDate, importance) {
     
     dueDate = `${formatDistance(dueDate, Date.now(), {addSuffix: true})} (${format(dueDate, 'MM/dd/yyyy')})`;
 
-    /*let done = false;
-    const toggleDone = () => {
-        done = !done;
-    }*/
+    const id = Date.now().toString(16);
+    const getId = () => {
+        return id;
+    }
     
     const getImportance = () => {
         return importance;
@@ -19,7 +19,7 @@ const todo = function (name, description, dueDate, importance) {
         importance = !importance;
     }
 
-    return {name, description, dueDate, getImportance, toggleImportance}
+    return {name, description, dueDate, getId, getImportance, toggleImportance}
 }
 
 const project = (name) => {
@@ -30,6 +30,16 @@ const project = (name) => {
 let projects = [];
 let getProject = (name) => {
     return projects.find((p) => p["name"] == name);
+}
+let deleteTodo = (id) => {
+    for (let i = 0; i < projects.length; i++) {
+        for (let j = 0; j < projects[i].tasks.length; j++) {
+            if(projects[i].tasks[j].getId() === id) {
+                projects[i].tasks.splice(j, 1);
+                console.dir(projects);
+            }
+        }
+    }
 }
 
 const projectModal = document.querySelector("#project-modal");
@@ -97,3 +107,7 @@ domController.addProjectToUI(getProject("project1"));
 let task1 = todo("read", "30 pages", new Date(), true);
 getProject("general").tasks.push(task1);
 domController.addTaskToUI(task1, getProject("general").name);
+
+console.log(projects);
+
+export {deleteTodo};

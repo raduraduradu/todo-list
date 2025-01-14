@@ -1,5 +1,7 @@
+import {deleteTodo} from "./index.js";
 import starSvg from "./assets/star.svg";
 import starOutlineSvg from "./assets/star-outline.svg";
+import deleteSvg from "./assets/delete.svg";
 
 const domController = (function () {
     const sidebar = document.querySelector("#sidebar");
@@ -29,49 +31,67 @@ const domController = (function () {
         let container = document.createElement("div");
         container.classList.add("task");
 
-        let label = document.createElement("label");
+        (function () {
+            let label = document.createElement("label");
                 
-        let checkbox = document.createElement("input");
-        checkbox.type = 'checkbox';
-        label.appendChild(checkbox);
+            let checkbox = document.createElement("input");
+            checkbox.type = 'checkbox';
+            label.appendChild(checkbox);
 
-        let h2 = document.createElement("h2");
-        h2.textContent = task.name;
-        label.appendChild(h2);
-        
-        checkbox.onclick = () => {
-            //task.toggleDone();
-            h2.classList.toggle("done");
-        }
-
-        container.appendChild(label);
-
-        let p = document.createElement("p");
-        p.textContent = task.description;
-        container.appendChild(p);
-
-        let p2 = document.createElement("p");
-        p2.textContent = `Due ${task.dueDate}`;
-        container.appendChild(p2);
-
-        let starIcon = document.createElement("img");
-        starIcon.classList.add("star-icon");
-        const updateStarIcon = () => {
-            if(task.getImportance() === true) {
-                starIcon.src = starSvg;
-                starIcon.title = "Marked as important";
+            let h2 = document.createElement("h2");
+            h2.textContent = task.name;
+            label.appendChild(h2);
+            
+            checkbox.onclick = () => {
+                h2.classList.toggle("done");
             }
-            else {
-                starIcon.src = starOutlineSvg;
-                starIcon.title = "Not marked as important";
+
+            container.appendChild(label);
+        })();
+
+        (function () {
+            let p = document.createElement("p");
+            p.textContent = task.description;
+            container.appendChild(p);
+
+            let p2 = document.createElement("p");
+            p2.textContent = `Due ${task.dueDate}`;
+            container.appendChild(p2);
+        })();
+
+        (function () {
+            let starIcon = document.createElement("img");
+            starIcon.classList.add("star-icon");
+
+            const updateStarIcon = () => {
+                if(task.getImportance() === true) {
+                    starIcon.src = starSvg;
+                    starIcon.title = "Marked as important";
+                }
+                else {
+                    starIcon.src = starOutlineSvg;
+                    starIcon.title = "Not marked as important";
+                }
             }
-        }
-        updateStarIcon();
-        starIcon.onclick = () => {
-            task.toggleImportance();
             updateStarIcon();
-        }
-        container.appendChild(starIcon);
+            starIcon.onclick = () => {
+                task.toggleImportance();
+                updateStarIcon();
+            }
+            container.appendChild(starIcon);
+        })();
+
+        (function () {
+            let trashIcon = document.createElement("img");
+            trashIcon.classList.add("trash-icon");
+            trashIcon.title = "Delete task";
+            trashIcon.src = deleteSvg;
+            trashIcon.onclick = () => {
+                deleteTodo(task.getId());
+                container.remove();
+            }
+            container.appendChild(trashIcon);
+        })();
 
         console.log(projectContents);
         projectContents[projectName].appendChild(container);

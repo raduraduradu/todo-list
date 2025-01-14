@@ -67,6 +67,12 @@ h2.done {
     cursor: pointer;
 }
 
+.trash-icon {
+    filter: invert(38%) sepia(48%) saturate(602%) hue-rotate(305deg) brightness(107%) contrast(80%);
+    width: 30px;
+    cursor: pointer;
+}
+
 .header-div {
     display: flex;
     justify-content: space-between;
