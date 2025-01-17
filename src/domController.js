@@ -60,37 +60,44 @@ const domController = (function () {
         })();
 
         (function () {
-            let starIcon = document.createElement("img");
-            starIcon.classList.add("star-icon");
+            let div = document.createElement("div")
+            div.style.display = "flex";
+            div.style.justifyContent = "space-between";
+            
+            (function () {
+                let starIcon = document.createElement("img");
+                starIcon.classList.add("star-icon");
 
-            const updateStarIcon = () => {
-                if(task.getImportance() === true) {
-                    starIcon.src = starSvg;
-                    starIcon.title = "Marked as important";
+                const updateStarIcon = () => {
+                    if(task.getImportance() === true) {
+                        starIcon.src = starSvg;
+                        starIcon.title = "Marked as important";
+                    }
+                    else {
+                        starIcon.src = starOutlineSvg;
+                        starIcon.title = "Not marked as important";
+                    }
                 }
-                else {
-                    starIcon.src = starOutlineSvg;
-                    starIcon.title = "Not marked as important";
-                }
-            }
-            updateStarIcon();
-            starIcon.onclick = () => {
-                task.toggleImportance();
                 updateStarIcon();
-            }
-            container.appendChild(starIcon);
-        })();
+                starIcon.onclick = () => {
+                    task.toggleImportance();
+                    updateStarIcon();
+                }
+                div.appendChild(starIcon);
+            })();
 
-        (function () {
-            let trashIcon = document.createElement("img");
-            trashIcon.classList.add("trash-icon");
-            trashIcon.title = "Delete task";
-            trashIcon.src = deleteSvg;
-            trashIcon.onclick = () => {
-                deleteTodo(task.getId());
-                container.remove();
-            }
-            container.appendChild(trashIcon);
+            (function () {
+                let trashIcon = document.createElement("img");
+                trashIcon.classList.add("trash-icon");
+                trashIcon.title = "Delete task";
+                trashIcon.src = deleteSvg;
+                trashIcon.onclick = () => {
+                    deleteTodo(task.getId());
+                    container.remove();
+                }
+                div.appendChild(trashIcon);
+            })();
+            container.appendChild(div);
         })();
 
         console.log(projectContents);
